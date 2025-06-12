@@ -1,13 +1,13 @@
-FROM docker:dind 
+FROM alpine:latest 
 
-RUN apk add --no-cache openssh bash sudo \
-	&& adduser -D anisble \
+RUN apk add --no-cache openssh bash sudo shadow \
+	&& adduser -D ansible \
 	&& echo "ansible:ansible" | chpasswd \
 	&& addgroup ansible wheel 
 	
-RUN mkdir /var/run/sshd
+RUN mkdir -p /var/run/sshd
 
 EXPOSE 22
 
-CMD ["/usr/bin/sshd", "-D"]
+CMD ["/usr/sbin/sshd", "-D"]
 
