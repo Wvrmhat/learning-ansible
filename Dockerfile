@@ -7,6 +7,9 @@ RUN apk add --no-cache openssh bash sudo shadow \
 	
 RUN mkdir -p /var/run/sshd
 
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+
 EXPOSE 22
 
 ENTRYPOINT ["/entrypoint.sh"]
