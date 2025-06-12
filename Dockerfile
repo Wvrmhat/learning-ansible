@@ -9,5 +9,6 @@ RUN mkdir -p /var/run/sshd
 
 EXPOSE 22
 
+ENTRYPOINT ["/entrypoint.sh"]
 CMD ["/usr/sbin/sshd", "-D"]
 
