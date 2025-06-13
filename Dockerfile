@@ -1,6 +1,6 @@
 FROM alpine:latest 
 
-RUN apk add --no-cache openssh bash sudo shadow \
+RUN apk add --no-cache openssh bash sudo shadow python3 \
 	&& adduser -D ansible \
 	&& echo "ansible:ansible" | chpasswd \
 	&& addgroup ansible wheel 
