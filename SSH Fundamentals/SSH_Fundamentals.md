@@ -31,6 +31,7 @@ ssh-keygen -t ed25519 -C "home default"
 
 ```
 ls -la .ssh 	(to view the changes)
+ls -l /home/user/.ssh		(used instead when working in WSL) 
 cat .ssh/id_ed25519.pub 	(view the public key) 
 cat .ssh/id_ed25519 		(view the private key) 
 ```
