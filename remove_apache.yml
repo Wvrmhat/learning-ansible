@@ -11,9 +11,9 @@
   - name: install apache2 package
     apk:
       name: apache2
-      state: latest 
+      state: absent
 
   - name: add php support for apache
     apk:
       name: php7
-      state: latest 
+      state: absent 
