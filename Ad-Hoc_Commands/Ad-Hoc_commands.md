@@ -23,3 +23,47 @@ ansible all -m gather_facts --limit server1 		(for viewing against specific serv
 ```
 - Use case includes finding information for specific host, as well as for troubleshooting a specific processor or distro
 - This also allows comparison for variables in **playbook** against how it is setup in server  
+
+# Elevated Ad-Hoc Commands 
+
+To have sudo permission the package needs to be installed first, this is done in the master container/node. 
+
+```
+apk add sudo 
+```
+
+- Once sudo is finished installing on each server, the file needs to be edited  
+- The sudoers file (etc/sudoers) must be edited to include ansible as a user
+
+```
+(in the sudoers file) 
+ansible ALL=(ALL) NOPASSWD: ALL		(bypasses need for password) 
+``` 
+
+- Then an update can be run on all three servers at the same time 
+
+```
+ansible all -m apk -a update_cache=true --become --ask-become-pass	(root password was set as "ansible" during setup) 
+ansible all -m apk -a update_cache=true --become -i inventory		(if NOPASSWD is in place then run this to skip need to input a password) 
+```
+![screenshot of updating servers](server_update.png) 
+
+## Installing packages on servers 
+
+Since servers can be updated all concurrently, packages can also be added in a similar way 
+
+- only packages relative to the distro can be installed
+- neovim and tmux can be installed for example 
+
+```
+ansible all -m apk -a name=neovim --become --ask-become-pass
+ansible all -m apk -a name=tmux --become --ask-become-pass
+```
+- all packages can also be upgraded 
+
+```
+ansible all -m apk -a "upgrade=true" --become --ask-become-pass (upgrades all packages - Alpine)
+ansible all -m apk -a "upgrade=true" --become --ask-become-pass (similar command but works on Debian/Ubuntu) 
+```
+
+![screenshot of upgrading packages](server_upgrade_packages.png) 
