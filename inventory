@@ -2,3 +2,7 @@
 server1 ansible_host=172.20.0.11 ansible_user=ansible ansible_ssh_private_key_file=/root/.ssh/ansible 
 server2 ansible_host=172.20.0.12 ansible_user=ansible ansible_ssh_private_key_file=/root/.ssh/ansible
 server3 ansible_host=172.20.0.13 ansible_user=ansible ansible_ssh_private_key_file=/root/.ssh/ansible
+
+[all:vars]
+apache_package=apache2
+php_package=php83-apache2
